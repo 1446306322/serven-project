@@ -27,6 +27,7 @@ public class UserController {
         System.out.println("来到控制层");
         User user = userservice.login(idcard,name);
         System.out.println(user);
+        System.out.println("输出成功");
         return user;
     }
 }
