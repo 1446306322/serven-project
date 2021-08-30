@@ -1,6 +1,6 @@
 package com.seven.bean;
 
-import io.swagger.annotations.ApiModel;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,9 +8,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ApiModel("材料")
-public class Material {
-    private Integer id;
-    private String mname;
-    private String mtype;
+public class BusinessAndMaterial {
+    private Integer bid;
+    private Integer mid;
+    private Integer number;
 }
