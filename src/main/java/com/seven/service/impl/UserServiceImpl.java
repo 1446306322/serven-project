@@ -12,7 +12,15 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
 
     @Override
-    public User login(Integer idcard, String name) {
-        return userMapper.login(idcard,name);
+    public User login(Integer idcard, String password) {
+        return userMapper.login(idcard,password);
     }
+
+    @Override
+    public int register(User user) {
+
+        return userMapper.register(user);
+    }
+
+
 }

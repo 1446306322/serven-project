@@ -15,6 +15,7 @@ public class User {
     private Integer idcard;
     @ApiModelProperty("名字")
     private String name;
+    private String password;
     private Integer phone;
     private String address;
 }

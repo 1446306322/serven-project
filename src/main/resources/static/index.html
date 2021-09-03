@@ -1,0 +1,171 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>房产管理</title>
+<meta name="Keywords" content="" >
+<meta name="Description" content="" >
+<link href="css/index.css" rel="stylesheet">
+<link rel="stylesheet" href="bootstrap-3.4.1-dist/css/bootstrap.css">
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>>
+<style>
+   .login {
+         position: absolute;
+         top: 20px;
+         right: 20px;
+         cursor: pointer;
+       }
+    /* .login a:active{
+      text-decoration: none;
+    } */
+
+</style>
+  <script type="text/javascript">
+    function registerUser() {
+        $.ajax({
+          //请求方式
+          type : "get",
+          //请求的媒体类型
+          contentType: "application/json;charset=UTF-8",
+          //请求地址
+          url : "http://localhost:8090/user/register",
+          //数据，json字符串
+          data : {
+            idcard:$('#idcard').val(),
+            name:$('#name').val(),
+            password:$('#password').val()
+          },
+          //请求成功
+          success : function(result) {
+            if(result == 1){
+              alert("注册成功");
+              $(location).attr("href","index.html");
+            }else{
+              alert("注册失败");
+            }
+          },
+          //请求失败，包含具体的错误信息
+          error : function(e){
+            console.log(e.status);
+            console.log(e.responseText);
+            alert("注册失败");
+          }
+        });
+
+    }
+
+    function loginUser() {
+      $.ajax({
+        type: "get",
+        contentType: "application/json;charset=UTF-8",
+        url: "http://localhost:8090/user/login",
+        data: {
+          login_idcard: $('#login_idcard').val(),
+          login_password: $('#login_password').val()
+        },
+        success:function(result){
+          console.log(result);
+          alert("欢迎"+result.name+"登陆成功");
+          $(location).attr("href","registration.do");
+        },
+        error : function(e){
+          console.log(e.status);
+          console.log(e.responseText);
+          alert("注册失败");
+        }
+      });
+    };
+
+
+  </script>
+</head>
+<body>
+<!-- 登录模态框 -->
+<div id="login" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+            <h4 class="modal-title" id="mySmallModalLabel">登录</h4>
+        </div>
+        <form action="/user/login" method="get">
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="recipient-name" class="control-label">身份证号</label>
+              <input type="text" class="form-control" id="login_idcard" name="login_idcard">
+            </div>
+            <div class="form-group">
+              <label for="message-text" class="control-label">密码</label>
+              <input type="password" class="form-control" id="login_password" name="login_password">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <!-- <button type="button" class="btn btn-default">注册</button> -->
+            <input type="button" class="btn btn-primary" onclick="loginUser()" id="loginButton" value="登录">
+            <!-- <button type="button" class="btn btn-primary">登录</button> -->
+          </div>
+        </form>
+    </div>
+  </div>
+</div>
+<!-- 注册模态框 -->
+<div id="regist" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+            <h4 class="modal-title" id="mySmallModalLabel">注册</h4>
+        </div>
+        <form action="/user/register" method="get" id="registerForm">
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="recipient-name" class="control-label">用户名</label>
+              <input type="text" class="form-control" id="name" name="name">
+            </div>
+            <div class="form-group">
+              <label for="message-text" class="control-label">身份证号码</label>
+              <input type="text" class="form-control" id="idcard" name="idcard">
+            </div>
+            <div class="form-group">
+              <label for="message-text" class="control-label">密码</label>
+              <input type="password" class="form-control" id="password" name="password">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <!-- <button type="button" class="btn btn-default">注册</button> -->
+            <input type="button" class="btn btn-default" onclick="registerUser()" value="注册">
+            <!-- <button type="button" class="btn btn-primary">登录</button> -->
+          </div>
+        </form>
+    </div>
+  </div>
+</div>
+<header>
+  <div class="logo box">房产登记网站</div>
+  <div class="login">
+    <a href="#" data-toggle="modal" data-target="#login">登录</a>
+    <span>/</span>
+    <a href="#" data-toggle="modal" data-target="#regist">注册</a>
+  </div>
+  <nav id="nav" class="box">
+    <ul>
+      <li><a href="index.html">网站首页</a></li>
+      <li><a href="/registration.do">产权登记</a></li>
+      <li><a href="/government.do">政务中心</a></li>
+      <li><a href="/house.do">房产股</a></li>
+      <li><a href="/archives.do">档案馆</a></li>
+    </ul>
+  </nav>
+</header>
+<div class="container" style="width: 1000px;">
+  <div class="jumbotron">
+    <h1>房产登记</h1>
+    <p>不动产登记是《中华人民共和国物权法》确立的一项物权制度，是指经权利人或利害关系人申请，由国家专职部门将有关不动产物权及其变动事项记载于不动产登记簿的事实。
+      作为物权公示手段，不动产登记本质上为产生司法效果的事实行为而非登记机关的行政管理行为</p>
+    <p><a class="btn btn-primary btn-lg" href="../templates/registration.html" role="button">产权登记</a></p>
+  </div>
+</div>
+</body>
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
+<script src="bootstrap-3.4.1-dist/js/bootstrap.js"></script>
+</html>
